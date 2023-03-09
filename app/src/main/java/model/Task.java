@@ -11,13 +11,10 @@ public class Task {
     private String notes;
     private boolean isCompleted;
     private Date deadline;
-    private Date cratedAt;
+    private Date createdAt;
     private Date updatedAt;
 
-    public Task() {
-    }
-    
-    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Date deadline, Date cratedAt, Date updatedAt) {
+    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Date deadline, Date createdAt, Date updatedAt) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
@@ -25,8 +22,12 @@ public class Task {
         this.notes = notes;
         this.isCompleted = isCompleted;
         this.deadline = deadline;
-        this.cratedAt = cratedAt;
+        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+    
+    public Task(){
+        this.createdAt = new Date();
     }
 
     public int getId() {
@@ -85,12 +86,12 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public Date getCratedAt() {
-        return cratedAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCratedAt(Date cratedAt) {
-        this.cratedAt = cratedAt;
+    public void setCreatedAt(Date cratedAt) {
+        this.createdAt = cratedAt;
     }
 
     public Date getUpdatedAt() {
@@ -103,7 +104,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", isCompleted=" + isCompleted + ", deadline=" + deadline + ", cratedAt=" + cratedAt + ", updatedAt=" + updatedAt + '}';
+        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", isCompleted=" + isCompleted + ", deadline=" + deadline + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
       
 }
