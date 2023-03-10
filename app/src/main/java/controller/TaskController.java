@@ -97,7 +97,7 @@ public class TaskController {
     }
     
     public List<Task> getAll(int idProject){
-        String slq = "SELECT * FROM tasks WHERE idProjet = ?";
+        String sql = "SELECT * FROM tasks WHERE idProjet = ?";
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -107,7 +107,7 @@ public class TaskController {
         
         try {
             connection = ConnectionFactory.getConnection();
-            statement = connection.prepareStatement(slq);
+            statement = connection.prepareStatement(sql);
             statement.setInt(1, idProject);
             resultSet = statement.executeQuery();
             
