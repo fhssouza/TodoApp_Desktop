@@ -26,7 +26,7 @@ public class ProjectController {
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
             statement.setDate(3, new Date(project.getCreatedAt().getTime()));
-            statement.setDate(5, new Date(project.getUpdatedAt().getTime()));
+            statement.setDate(4, new Date(project.getUpdatedAt().getTime()));
             statement.execute();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar o projeto " +
@@ -39,9 +39,9 @@ public class ProjectController {
     public void update(Project project){
         String sql = "UPDATE projects SET "
                 + "name = ?,"
-                + "description = ?"
-                + "createdAt = ?"
-                + "updateAt = ?"
+                + "description = ?,"
+                + "createdAt = ?,"
+                + "updatedAt = ?"
                 + "WHERE id = ?";
         
         Connection connection = null;
@@ -65,7 +65,7 @@ public class ProjectController {
     }
     
     public void removeById(int projectId){
-        String sql = "DELETE * FROM project WHERE id = ?";
+        String sql = "DELETE FROM projects WHERE id = ?";
         
         Connection connection = null;
         PreparedStatement statement = null;

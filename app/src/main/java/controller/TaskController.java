@@ -20,7 +20,7 @@ public class TaskController {
                 + "notes,"
                 + "deadline,"
                 + "createdAt,"
-                + "updadtedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -79,7 +79,7 @@ public class TaskController {
     }
     
     public void removeById(int taskId){
-        String sql = "DELETE FROM task WHERE id = ?";
+        String sql = "DELETE FROM tasks WHERE id = ?";
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -96,8 +96,8 @@ public class TaskController {
         }
     }
     
-    public List<Task> getAll(int idProject){
-        String sql = "SELECT * FROM tasks WHERE idProjet = ?";
+    public List<Task> getAll(){
+        String sql = "SELECT * FROM tasks";
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -108,7 +108,6 @@ public class TaskController {
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, idProject);
             resultSet = statement.executeQuery();
             
             while(resultSet.next()){
@@ -122,7 +121,7 @@ public class TaskController {
                 task.setIsCompleted(resultSet.getBoolean("completed"));
                 task.setDeadline(resultSet.getDate("deadline"));
                 task.setCreatedAt(resultSet.getDate("createdAt"));
-                task.setCreatedAt(resultSet.getDate("updateAt"));
+                task.setCreatedAt(resultSet.getDate("updatedAt"));
                 
                 tasks.add(task);
             }
