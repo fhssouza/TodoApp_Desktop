@@ -114,7 +114,6 @@ public class TaskController {
                 Task task = new Task();
                 task.setId(resultSet.getInt("id"));
                 task.setId(resultSet.getInt("idProject"));
-                task.setIdProject(resultSet.getInt("idProject"));
                 task.setName(resultSet.getString("name"));
                 task.setDescription(resultSet.getString("description"));
                 task.setNotes(resultSet.getString("notes"));
@@ -127,6 +126,43 @@ public class TaskController {
             }
         } catch (Exception e) {
             throw new RuntimeException("Erro ao listar as tarefas" + e.getMessage(), e);
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement, resultSet);
+        }
+         return tasks;
+    }
+    
+     public List<Task> getAllById(int idProject){
+        String sql = "SELECT * FROM tasks WHERE idProject = ?";
+        
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        
+        List<Task> tasks = new ArrayList<>();
+        
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, idProject);
+            resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                Task task = new Task();
+                task.setId(resultSet.getInt("id"));
+                task.setIdProject(resultSet.getInt("idProject"));
+                task.setName(resultSet.getString("name"));
+                task.setDescription(resultSet.getString("description"));
+                task.setNotes(resultSet.getString("notes"));
+                task.setIsCompleted(resultSet.getBoolean("completed"));
+                task.setDeadline(resultSet.getDate("deadline"));
+                task.setCreatedAt(resultSet.getDate("createdAt"));
+                task.setCreatedAt(resultSet.getDate("updatedAt"));
+                
+                tasks.add(task);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao listar as tarefas por Projetos" + e.getMessage(), e);
         } finally {
             ConnectionFactory.closeConnection(connection, statement, resultSet);
         }
