@@ -14,6 +14,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
 import model.Task;
+import util.ButtonColumnCellRederer;
+import util.DeadlineColumnCellRederer;
 import util.TaskTableModel;
 
 /**
@@ -30,9 +32,11 @@ public class MainScreen extends javax.swing.JFrame {
 
     public MainScreen() {
         initComponents();
-        decorateTableTask();
+
         initDataController();
         initComponestModel();
+        
+        decorateTableTask();
     }
 
     /**
@@ -448,6 +452,14 @@ public class MainScreen extends javax.swing.JFrame {
         
         //Criando um sort automatico para as colunas da table
         jTableTasks.setAutoCreateRowSorter(true);
+        
+        //personalizando a celula prazo
+        jTableTasks.getColumnModel().getColumn(2).setCellRenderer(new DeadlineColumnCellRederer());
+        
+        //incluindo os botões editar e excluir na JTable de tarefas
+        jTableTasks.getColumnModel().getColumn(4).setCellRenderer(new ButtonColumnCellRederer("edit"));
+        
+        jTableTasks.getColumnModel().getColumn(5).setCellRenderer(new ButtonColumnCellRederer("delete"));
     }
     
     public void initDataController(){
